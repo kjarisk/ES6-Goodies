@@ -1,4 +1,30 @@
-# ES6 Syntax Cheat Sheet
+# ES6 Syntax / feature sheet
+
+## Resources
+[Compat-table for ES6](https://kangax.github.io/compat-table/es6)
+
+
+### Fat arrow
+Variations of fat arrow
+```javascript
+const getPrice = () => 6;
+console.log(getPrice());
+
+const getPrice = count => count * 6;
+console.log(getPrice());
+
+const getPrice = (count, tax) => count * 6 * (1 + tax);
+console.log(getPrice());
+
+const getPrice = (count, tax) => {
+  let total = count * 6;
+  total *= (1 + tax);
+  return total;
+}
+console.log(getPrice());
+```
+
+This keyword, dont have to bind anymore. Can change this with bind, apply or call.
 
 ### forEach
 
@@ -141,6 +167,15 @@ defaultColors.concat(userFavoriteColors);
 
 ['blue', 'green', ...defaultColors, ...userFavoriteColors, ...fallColors];
 
+const showColors = (fallColor, ...colors) => console.log(colors);
+showColors( 'blue', 'red', 'pink');
+
+const prices = [12, 20, 18];
+const maxP = Math.max(...prices);
+console.log(maxP);
+
+const letters = [ 'A', ...'BCD', 'E'];
+console.log(letters);
 ```
 
 ### Destructuring
@@ -206,6 +241,27 @@ function double(numbers) {
     return [number*2,...double(rest)];    
 }
 
+
+```
+
+### Extensions
+
+... coming soon ... / Lazy
+. Object
+. string
+. number
+. Math
+. RegExp
+```javascript
+const pattern = /\u{1f3c4}/u;
+console.log(pattern.test('🏄'));
+```
+. Function
+
+
+### iterator
+
+```javascript
 
 ```
 
@@ -378,13 +434,13 @@ Promise.all([
 ])
 .then(responses => {
     let [comments, posts, users] = responses;
-    
+
     this.setState({
         comments,
         posts,
         users
     })
-}) 
+})
 ```
 
 ### Async control flow
@@ -406,19 +462,19 @@ async _handleCommentSubmit(commit) {
 
 const funWithAsync = async () => {
     let uniqueAuthors = await getUniqueCommentAuthors()
-    
+
     await sleep(1500)
-    
+
     let packageInfo = JSON.parse(await readFile('./package.json'));
-    
+
     await sleep(3000)
-    
+
     let [comments, posts, users] = await Promise.all([
         fetchComments(),
         fetchPosts(),
         fetchUsers(),
     ])
-    
+
     return 42;
 }
 ```
